@@ -25,3 +25,12 @@
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = https://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "bundle/vimwiki"]
+	path = bundle/vimwiki
+	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "bundle/grep"]
+	path = bundle/grep
+	url = https://github.com/vim-scripts/grep.vim.git
