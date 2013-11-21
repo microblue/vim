@@ -333,6 +333,3 @@ function! s:OtherConfig()
     endif
 endfunction
 "}}}
-
-
-

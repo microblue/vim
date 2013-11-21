@@ -10,6 +10,7 @@ set ruler
 set ignorecase
 set incsearch
 set nu
+set background=dark
 syntax enable
 syntax on
 
@@ -73,6 +74,19 @@ inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 "NERDTree
 map <F8> :NERDTreeToggle<CR>
 
+function! s:SourceExistFile(filename)
+	if filereadable(a:filename)
+		exec 'source '. a:filename
+	endif
+endfun
+
+let g:vimrc_author='liyi'
+let g:vimrc_email='lyliyi2009@gmail.com'
+let g:vimrc_homepage='http://blog.maobo.net'
+nmap <F4> :AuthorInfoDetect<cr>
+
+"runtime! __Project__.vim
+"call s:SourceExistFile($HOME.'/.vim/__Project__.vim')
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 Helptags
