@@ -20,14 +20,14 @@ else
     "set backup
 endif
 
-"set tags=/home/liyi/python/tags
+set tags=/home/liyi/php/tags
 
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-"let Tlist_Auto_Open=1
+let Tlist_Auto_Open=1
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 nmap <silent> <F8> :WMToggle<cr>
 nnoremap <silent> <F3> :Grep<CR>
@@ -72,7 +72,7 @@ endfunction
 inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
 "NERDTree
-map <F8> :NERDTreeToggle<CR>
+map <F7> :NERDTreeToggle<CR>
 
 function! s:SourceExistFile(filename)
 	if filereadable(a:filename)
