@@ -10,7 +10,7 @@ set ruler
 set ignorecase
 set incsearch
 set nu
-set background=dark
+colorscheme darkblack
 syntax enable
 syntax on
 
