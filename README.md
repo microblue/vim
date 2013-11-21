@@ -20,7 +20,7 @@ git commit -m "init"
 
 #4.将代码托管到 Github
 #登陆到 https://github.com/ ，新建一个 Repositorie 命名为 vim，然后执行
-git remote add origin git@github.com:maobo/vim.git # 请改成自己的代码仓库地址
+git remote add origin git@github.com:maobonet/vim.git # 请改成自己的代码仓库地址
 git push origin master
 
 #5.安装并配置启用 vim-pathogen 插件
@@ -53,7 +53,7 @@ cd ~/.vim
 git push origin master
 
 #11.在其他机器使用相同配置
-git clone http://github.com/username/vim.git ~/.vim
+git clone http://github.com/maobonet/vim.git ~/.vim
 ln -s ~/.vim/vimrc ~/.vimrc
 cd ~/.vim
 git submodule init
