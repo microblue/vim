@@ -94,6 +94,21 @@ nnoremap <C-l> gt
 nnoremap <C-h> Gt
 nnoremap <leader>t : tabe<CR>
 
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+nnoremap ,1 1gt
+nnoremap ,2 2gt
+nnoremap ,3 3gt
+nnoremap ,4 4gt
+nnoremap ,5 5gt
+nnoremap ,6 6gt
+nnoremap ,7 7gt
+nnoremap ,8 8gt
+nnoremap ,9 9gt
+nnoremap ,0 :tablast<CR>
 
 "let g:vimrc_author='liyi'
 "let g:vimrc_email='lyliyi2009@gmail.com'
