@@ -20,14 +20,15 @@ else
     "set backup
 endif
 
-set tags=/home/liyi/php/tags
+"set tags=/home/liyi/php/tags
+set tags=/var/www/33pu/33pu/tags
 
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-let Tlist_Auto_Open=1
+let Tlist_Auto_Open=0
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 nmap <silent> <F8> :WMToggle<cr>
 nnoremap <silent> <F3> :Grep<CR>
@@ -80,10 +81,24 @@ function! s:SourceExistFile(filename)
 	endif
 endfun
 
-let g:vimrc_author='liyi'
-let g:vimrc_email='lyliyi2009@gmail.com'
-let g:vimrc_homepage='http://blog.maobo.net'
-nmap <F4> :AuthorInfoDetect<cr>
+"更新当前目录的代码
+map <F5> :!svn up <CR>
+"提交当前目录的svn
+map <F4> :!svn ci -m ""<CR>
+"提交当前文件
+map <F6> :!svn ci -m "" % <CR>
+
+"conf for tabs
+let mapleader = ','
+nnoremap <C-l> gt
+nnoremap <C-h> Gt
+nnoremap <leader>t : tabe<CR>
+
+
+"let g:vimrc_author='liyi'
+"let g:vimrc_email='lyliyi2009@gmail.com'
+"let g:vimrc_homepage='http://blog.maobo.net'
+"nmap <F4> :AuthorInfoDetect<cr>
 
 "runtime! __Project__.vim
 "call s:SourceExistFile($HOME.'/.vim/__Project__.vim')
