@@ -81,6 +81,8 @@ function! s:SourceExistFile(filename)
 	endif
 endfun
 
+"检测php语法
+map <F8> :!php -l <CR>
 "更新当前目录的代码
 map <F5> :!svn up <CR>
 "提交当前目录的svn
@@ -91,7 +93,6 @@ map <F6> :!svn ci -m "" % <CR>
 "conf for tabs
 let mapleader = ','
 nnoremap <C-l> gt
-nnoremap <C-h> Gt
 nnoremap <leader>t : tabe<CR>
 
 nnoremap <c-j> <c-w>j
