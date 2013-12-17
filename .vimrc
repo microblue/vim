@@ -38,12 +38,12 @@ nnoremap <silent> <F3> :Grep<CR>
 
 inoremap ( ()<ESC>i
 inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { {<CR>}<ESC>O
+inoremap { {}<ESC>i
 inoremap } <c-r>=ClosePair('}')<CR>
 inoremap [ []<ESC>i
 inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
+"inoremap " ""<ESC>i
+"inoremap ' ''<ESC>i
 
 function ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
