@@ -53,8 +53,8 @@ cd ~/.vim
 git push origin master
 
 #11.在其他机器使用相同配置
-git clone http://github.com/maobonet/vim.git ~/.vim
-ln -s ~/.vim/vimrc ~/.vimrc
+git clone https://github.com/maobonet/vim.git ~/.vim
+ln -s ~/.vim/.vimrc ~/.vimrc
 cd ~/.vim
 git submodule init
 git submodule update
