@@ -1,5 +1,16 @@
 vim 
-===
+=====================================================
+在其他机器使用相同配置
+git clone https://github.com/maobonet/vim.git ~/.vim
+
+ln -s ~/.vim/.vimrc ~/.vimrc
+
+cd ~/.vim
+
+git submodule init
+
+git submodule update
+=====================================================
 
 使用github管理vim插件
 
@@ -65,3 +76,9 @@ git submodule update
 
 
 #enjoy it
+
+QA：
+1）如果安装完毕后，在使用vim过程中遇到错误：E117: Unknown function: pathogen#infect
+rm -r ~/.vim/bundle/vim-pathogen
+git submodule add https://github.com/tpope/vim-pathogen.git   bundle/vim-pathogen
+即可
