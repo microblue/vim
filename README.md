@@ -79,6 +79,9 @@ git submodule update
 
 QA：
 1）如果安装完毕后，在使用vim过程中遇到错误：E117: Unknown function: pathogen#infect
+
 rm -r ~/.vim/bundle/vim-pathogen
+
 git submodule add https://github.com/tpope/vim-pathogen.git   bundle/vim-pathogen
+
 即可
