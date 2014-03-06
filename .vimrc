@@ -118,9 +118,25 @@ nnoremap ,0 :tablast<CR>
 "let g:vimrc_email='lyliyi2009@gmail.com'
 "let g:vimrc_homepage='http://blog.maobo.net'
 "nmap <F4> :AuthorInfoDetect<cr>
+"
+if has("cscope")
+	set csprg=/home/users/liyi07/cscope/bin/cscope
+	set csto=0
+	set cst
+	set nocsverb
+	if filereadable("cscope.out")
+		cs add ./cscope.out
+	elseif $CSCOPE_DB != ""
+		cs add $CSCOPE_DB
+	endif
+	set csverb
+	set cscopetag
+endif
+
 
 "runtime! __Project__.vim
 "call s:SourceExistFile($HOME.'/.vim/__Project__.vim')
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 Helptags
+
