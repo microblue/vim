@@ -14,22 +14,25 @@ colorscheme darkblack
 syntax enable
 syntax on
 
+set nobackup
 if has("vms")
-    "set nobackup
+    set nobackup
 else
     "set backup
 endif
 
 "set tags=/home/liyi/php/tags
-set tags=/var/www/33pu/33pu/tags
+set tags=/home/users/liyi07/work/tags
 
+let Tlist_Use_Right_Window=1 "use right window
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-let Tlist_Auto_Open=0
-let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
+let Tlist_Ctags_Cmd = '/home/users/liyi07/ctags/bin/ctags'
+let Tlist_Auto_Open=1
+"let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
+let g:winManagerWindowLayout = "TagList|BufExplorer"
 nmap <silent> <F8> :WMToggle<cr>
 nnoremap <silent> <F3> :Grep<CR>
 "map <c-w><c-f> :FirstExplorerWindow<cr>
@@ -82,7 +85,7 @@ function! s:SourceExistFile(filename)
 endfun
 
 "检测php语法
-map <F8> :!php -l <CR>
+"map <F8> :!php -l <CR>
 "更新当前目录的代码
 map <F5> :!svn up <CR>
 "提交当前目录的svn
