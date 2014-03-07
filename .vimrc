@@ -1,7 +1,9 @@
 set helplang=cn
 set encoding=utf-8
 
+set expandtab
 set smartindent
+set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 set number
