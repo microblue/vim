@@ -32,7 +32,7 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
 let Tlist_Ctags_Cmd = '/home/users/liyi07/ctags/bin/ctags'
-let Tlist_Auto_Open=1
+let Tlist_Auto_Open=0
 "let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 let g:winManagerWindowLayout = "TagList|BufExplorer"
 nmap <silent> <F8> :WMToggle<cr>
@@ -48,7 +48,7 @@ inoremap } <c-r>=ClosePair('}')<CR>
 inoremap [ []<ESC>i
 inoremap ] <c-r>=ClosePair(']')<CR>
 "inoremap " ""<ESC>i
-"inoremap ' ''<ESC>i
+inoremap ' ''<ESC>i
 
 function ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
@@ -86,8 +86,8 @@ function! s:SourceExistFile(filename)
 	endif
 endfun
 
-"检测php语法
-"map <F8> :!php -l <CR>
+"检查php语法
+map <F9> :!php -l % <CR>
 "更新当前目录的代码
 map <F5> :!svn up <CR>
 "提交当前目录的svn
@@ -135,6 +135,27 @@ if has("cscope")
 	set cscopetag
 endif
 
+" Check the syntax of a PHP file
+function! CheckPHPSyntax()
+    if &filetype != 'php'
+        echohl WarningMsg | echo 'This is not a PHP file !' | echohl None
+        return
+    endif
+
+    setlocal makeprg=php\ -l\ -n\ -d\ html_errors=off\ %
+    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+    echohl WarningMsg | echo 'Syntax checking output:' | echohl None
+
+    if &modified == 1
+        silent write
+    endif
+    silent make
+
+    clist
+endfunction
+
+"au filetype php map <F9> :call CheckPHPSyntax()<CR>
+"au filetype php imap <F9> <ESC>:call CheckPHPSyntax()<CR>
 
 "runtime! __Project__.vim
 "call s:SourceExistFile($HOME.'/.vim/__Project__.vim')
