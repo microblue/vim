@@ -1,3 +1,8 @@
+"sounds
+set noerrorbells
+set novisualbell
+set vb t_vb=
+
 set helplang=cn
 set encoding=utf-8
 
@@ -88,12 +93,6 @@ endfun
 
 "检查php语法
 map <F9> :!php -l % <CR>
-"更新当前目录的代码
-map <F5> :!svn up <CR>
-"提交当前目录的svn
-map <F4> :!svn ci -m ""<CR>
-"提交当前文件
-map <F6> :!svn ci -m "" % <CR>
 
 "conf for tabs
 let mapleader = ','
@@ -135,31 +134,11 @@ if has("cscope")
 	set cscopetag
 endif
 
-" Check the syntax of a PHP file
-function! CheckPHPSyntax()
-    if &filetype != 'php'
-        echohl WarningMsg | echo 'This is not a PHP file !' | echohl None
-        return
-    endif
+"authorinfo
+let g:vimrc_author='liyi'
+let g:vimrc_email='liyi@e.hunantv.com'
+let g:vimrc_homepage='http://www.hunantv.com'
+nmap <F4> :AuthorInfoDetect<cr>
 
-    setlocal makeprg=php\ -l\ -n\ -d\ html_errors=off\ %
-    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-    echohl WarningMsg | echo 'Syntax checking output:' | echohl None
-
-    if &modified == 1
-        silent write
-    endif
-    silent make
-
-    clist
-endfunction
-
-"au filetype php map <F9> :call CheckPHPSyntax()<CR>
-"au filetype php imap <F9> <ESC>:call CheckPHPSyntax()<CR>
-
-"runtime! __Project__.vim
-"call s:SourceExistFile($HOME.'/.vim/__Project__.vim')
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
-Helptags
-
