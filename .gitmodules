@@ -64,3 +64,6 @@
 [submodule "bundle/indentLine"]
 	path = bundle/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
+[submodule "bundle/Emmet"]
+	path = bundle/Emmet
+	url = https://github.com/vim-scripts/Emmet.vim.git
