@@ -1,3 +1,17 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+"syntax
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_check_on_open=1
+let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_javascript_syntax_checker="jshint"
+let g:syntastic_javascript_jshint_conf="~/jshintrc.json"
+let g:syntastic_python_python_exec = '/usr/bin/python'
+
 "sounds
 set noerrorbells
 set novisualbell
@@ -5,7 +19,7 @@ set vb t_vb=
 
 set helplang=cn
 set encoding=utf-8
-
+set cursorline
 set autoindent
 set autoread
 set backupcopy=yes
@@ -18,19 +32,29 @@ set smartcase
 set scrolloff=3
 
 set expandtab
+set smarttab
+set tabpagemax=20
+set showtabline=2
+
 set smartindent
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+set backspace=2
+
 set number
 set showmatch
+set matchtime=1
 set ruler
+
+set autochdir 
+
 set ignorecase
 set incsearch
+set hlsearch
 set nu
-colorscheme darkblack
+colorscheme torte
 syntax enable
-syntax on
 
 set guioptions-=T " 隐藏工具栏
 set guioptions-=m " 隐藏菜单栏
@@ -38,14 +62,23 @@ set cmdheight=1 " 设定命令行的行数为 1
 set laststatus=2 " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 
+set nocompatible
 set nobackup
-if has("vms")
-    set nobackup
-else
-    "set backup
+
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set wildmenu
+set wildmode=longest,list,full
+
+"tmux
+set mouse=a
+if exists("$TMUX")
+    set ttymouse=xterm2
 endif
 
-"set tags=/home/liyi/php/tags
+nmap <silent> <F2> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_width = 30
+
 set tags=/home/users/liyi07/work/tags
 
 let Tlist_Use_Right_Window=1 "use right window
@@ -55,8 +88,7 @@ let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
 let Tlist_Ctags_Cmd = '/home/users/liyi07/ctags/bin/ctags'
 let Tlist_Auto_Open=0
-"let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
-let g:winManagerWindowLayout = "TagList|BufExplorer"
+let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 
 "keyborad shortcuts
 let mapleader = ','
@@ -80,35 +112,60 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
 
-"nmap <silent> <F8> :WMToggle<cr>
-"nnoremap <silent> <F3> :Grep<CR>
-"map <c-w><c-f> :FirstExplorerWindow<cr>
-"map <c-w><c-b> :BottomExplorerWindow<cr>
-"map <c-w><c-t> :WMToggle<cr>
+let g:ctrlp_match_window = 'order:ttb,max:20'
+let g:NERDSpaceDelims=1
+let g:gitgutter_enabled = 0
+
+" Fix Cursor in TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+vnoremap p "_dP
 
 inoremap ( ()<ESC>i
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { {}<ESC>i
-inoremap } <c-r>=ClosePair('}')<CR>
 inoremap [ []<ESC>i
-inoremap ] <c-r>=ClosePair(']')<CR>
-"inoremap " ""<ESC>i
+inoremap { {}<ESC>i
+inoremap < <><ESC>i
+inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 
-function ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
+" C,C++,Java,Python按F1编译运行
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F1> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!java %<"
+    elseif &filetype == 'sh'
+        :!./%
+    elseif &filetype == 'python'
+        exec "!python %"
+    elseif &filetype == 'php'
+        exec "!php %"
     endif
-endfunction
+endfunc
 
 " PHP 自动完成
-" 设置自动完成的监听方式：尾部添加一个字母和清除一个字母
-set complete-=k complete+=k
+au FileType php call AddPHPFuncList()
+function AddPHPFuncList()
+    set complete-=k complete+=k
+    " 设置字典补全文件
+    set dictionary=$HOME/.vim/dict/php.dict
+endfunction
 
-" 设置字典补全文件
-set dictionary=$HOME/.vim/dict/php.dict
 " 使用 tab 键自动完成或尝试自动完成
 function! InsertTabWrapper()
 	let col=col('.')-1
@@ -122,25 +179,12 @@ endfunction
 " 重新映射 tab 键到 InsertTabWrapper 函数
 inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
-function! s:SourceExistFile(filename)
-	if filereadable(a:filename)
-		exec 'source '. a:filename
-	endif
-endfun
-
 "检查php语法
 map <F9> :!php -l % <CR>
 
 "conf for tabs
-let mapleader = ','
 nnoremap <C-l> gt
 nnoremap <leader>t : tabe<CR>
-
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
 nnoremap ,1 1gt
 nnoremap ,2 2gt
 nnoremap ,3 3gt
@@ -173,15 +217,10 @@ let g:vimrc_homepage='http://www.hunantv.com'
 nmap <F4> :AuthorInfoDetect<cr>
 
 "php 注释
-"source $HOME/.vim/bundle/php-doc/php-doc.vim
+source $HOME/.vim/bundle/php-doc/plugin/php-doc.vim
 inoremap <F3> <ESC>:call PhpDocSingle()<CR>
 nnoremap <F3> :call PhpDocSingle()<CR>
 vnoremap <F3> :call PhpDocRange()<CR>
-
-autocmd FileType php map <F1> :!php %<CR>
-autocmd FileType python map <F1> :!python %<CR>
-nmap <F9> :!php -l % <CR>
-
 
 "PowerLine插件 状态栏增强显示
 set laststatus=2
@@ -190,8 +229,3 @@ let g:Powline_symbols='fancy'
 
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
-
-
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
