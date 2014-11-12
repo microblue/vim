@@ -1,4 +1,6 @@
-execute pathogen#infect()
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 syntax on
 filetype plugin indent on
 
@@ -19,6 +21,10 @@ set vb t_vb=
 
 set helplang=cn
 set encoding=utf-8
+set fileencodings=utf-8,cp936,gb18030,big5,gbk,euc-jp,latin1
+set fileencoding=utf-8
+set termencoding=utf-8 "编码转换
+
 set cursorline
 set autoindent
 set autoread
@@ -26,6 +32,11 @@ set backupcopy=yes
 set clipboard=unnamed
 set directory-=.
 set laststatus=2
+
+set list
+set listchars=tab:\|\ ,
+highlight LeaderTab guifg=#666666
+match LeaderTab /\t/
 
 set showcmd
 set smartcase
@@ -35,7 +46,8 @@ set expandtab
 set smarttab
 set tabpagemax=20
 set showtabline=2
-
+set nowrapscan
+"set relativenumber
 set smartindent
 set softtabstop=4
 set shiftwidth=4
@@ -48,7 +60,6 @@ set matchtime=1
 set ruler
 
 set autochdir 
-
 set ignorecase
 set incsearch
 set hlsearch
@@ -81,14 +92,26 @@ let g:tagbar_width = 30
 
 set tags=/home/users/liyi07/work/tags
 
-let Tlist_Use_Right_Window=1 "use right window
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_File_Fold_Auto_Close=1
-let Tlist_Show_Menu=1
-let Tlist_Ctags_Cmd = '/home/users/liyi07/ctags/bin/ctags'
-let Tlist_Auto_Open=0
-let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
+"let Tlist_Use_Right_Window=1 
+"let Tlist_Show_One_File=1
+"let Tlist_Exit_OnlyWindow=1
+"let Tlist_File_Fold_Auto_Close=1
+"let Tlist_Show_Menu=1
+"let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+"let Tlist_Auto_Open=0
+"let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
+
+map <F2> :TlistToggle<cr>
+let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Compact_Format = 1           " 使用小窗口.
+let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Enable_Fold_Column = 0       " 使taglist插件不显示左边的折叠行
+let Tlist_Use_Right_Window = 1         "在右侧窗口中显示taglist窗口
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Inc_Winwidth = 0             " 防止taglist改变终端窗口的大小
+let Tlist_WinWidth = 25                " taglist窗口宽度
+let Tlist_Sort_Type = 'name'           " 排序 name.
+
 
 "keyborad shortcuts
 let mapleader = ','
@@ -197,7 +220,7 @@ nnoremap ,9 9gt
 nnoremap ,0 :tablast<CR>
 
 if has("cscope")
-	set csprg=/home/users/liyi07/cscope/bin/cscope
+	set csprg=/usr/loca/bin/cscope
 	set csto=0
 	set cst
 	set nocsverb
@@ -209,6 +232,53 @@ if has("cscope")
 	set csverb
 	set cscopetag
 endif
+
+"NERDTree
+let loaded_netrwPlugin = 0
+let NERDTreeCaseSensitiveSort=1
+let NERDTreeHijackNetrw = 0
+let NERDTreeChDirMode = 2
+let NERDTreeWinPos = 'left'
+let NERDTreeWinSize = 25
+let NERDTreeIgnore = [ '^\.svn$', '\~$' ]
+
+"-----------------------------------------------------------------
+" plugin - NERD_commenter.vim 注释代码用的
+" 将 mapleader 设置为 `,`
+" [count],cc 光标以下count行逐行添加注释(7,cc)
+" [count],cu 光标以下count行逐行取消注释(7,cu)
+" [count],cm 光标以下count行尝试添加块注释(7,cm)
+" ,cA 在行尾插入 /* */,并且进入插入模式。 这个命令方便写注释
+" ,c<space> toggle 注释
+" 注：count参数可选，无则默认为选中行或当前行
+"-----------------------------------------------------------------
+let NERDSpaceDelims=1       " 让注释符与语句之间留一个空格
+let NERDCompactSexyComs=1   " 多行注释时样子更好看
+
+" ---------------------------------------------------------------------
+" plugin indent guides 对齐线
+" ---------------------------------------------------------------------
+" <Leader>ig     toggle
+let g:indent_guides_guide_size=1    "设置宽度
+
+" ---------------------------------------------------------------------
+" 处理文件
+" ---------------------------------------------------------------------
+" **** PHP **** {{{
+" 不显示PHP变量再Taglist中
+let tlist_php_settings = 'php;c:class;d:constant;f:function'
+" 高亮显示sql语句
+let php_sql_query = 1 
+" }}}
+
+" **** Python *** {{{
+" For lines that end with \n\ or \ and continue on the next one.
+"let g:pyindent_continue = '&sw - &sw'
+let g:pyindent_continue = 0
+autocmd Filetype python set completefunc=pythoncomplete#Complete
+" }}}
+
+
 
 "authorinfo
 let g:vimrc_author='liyi'
@@ -229,3 +299,29 @@ let g:Powline_symbols='fancy'
 
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
+
+au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
+"快速保存为,s
+"快速退出（保存）为,w
+"快速退出（不保存）为,q
+nmap <leader>s :w!<cr>
+nmap <leader>w :wq!<cr>
+nmap <leader>q :q!<cr>
+
+nmap <C-t>   :tabnew<cr>
+nmap <C-p>   :tabprevious<cr>
+nmap <C-n>   :tabnext<cr>
+nmap <C-k>   :tabclose<cr>
+nmap <C-Tab> :tabnext<cr>
+
+"切换buffer
+nmap bn :bn<cr>
+nmap bp :bp<cr>
+
+" 插入模式按 F4 插入当前时间
+imap <f4> <C-r>=GetDateStamp()<cr>
+
+" 返回当前时期
+func! GetDateStamp()
+    return strftime('%Y-%m-%d')
+endfunction
