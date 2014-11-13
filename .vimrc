@@ -12,7 +12,6 @@ let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_javascript_syntax_checker="jshint"
 let g:syntastic_javascript_jshint_conf="~/jshintrc.json"
-let g:syntastic_python_python_exec = '/usr/bin/python'
 
 "sounds
 set noerrorbells
@@ -273,24 +272,22 @@ let php_sql_query = 1
 
 " **** Python *** {{{
 " For lines that end with \n\ or \ and continue on the next one.
-"let g:pyindent_continue = '&sw - &sw'
 let g:pyindent_continue = 0
 autocmd Filetype python set completefunc=pythoncomplete#Complete
 " }}}
 
-
-
 "authorinfo
+source ~/.vim/bundle/AuthorInfo/ftplugin/authorinfo.vim
 let g:vimrc_author='liyi'
 let g:vimrc_email='liyi@e.hunantv.com'
 let g:vimrc_homepage='http://www.hunantv.com'
 nmap <F4> :AuthorInfoDetect<cr>
 
 "php 注释
-source $HOME/.vim/bundle/php-doc/plugin/php-doc.vim
-inoremap <F3> <ESC>:call PhpDocSingle()<CR>
-nnoremap <F3> :call PhpDocSingle()<CR>
-vnoremap <F3> :call PhpDocRange()<CR>
+source ~/.vim/bundle/php-doc/plugin/php-doc.vim
+"inoremap <F3> <ESC>:call PhpDoc()<CR>
+nnoremap <F3> :call PhpDoc()<CR>
+"vnoremap <F2> :call PhpDocVarBlock()<CR>
 
 "PowerLine插件 状态栏增强显示
 set laststatus=2
@@ -319,9 +316,12 @@ nmap bn :bn<cr>
 nmap bp :bp<cr>
 
 " 插入模式按 F4 插入当前时间
-imap <f4> <C-r>=GetDateStamp()<cr>
+imap <F5> <C-r>=GetDateStamp()<cr>
 
 " 返回当前时期
 func! GetDateStamp()
     return strftime('%Y-%m-%d')
 endfunction
+
+let g:pydiction_location = '/Users/liyi/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height=3

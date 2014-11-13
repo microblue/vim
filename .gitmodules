@@ -67,3 +67,12 @@
 [submodule "bundle/Emmet"]
 	path = bundle/Emmet
 	url = https://github.com/vim-scripts/Emmet.vim.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "bundle/pep8"]
+	path = bundle/pep8
+	url = https://github.com/cburroughs/pep8.py.git
+[submodule "bundle/pythoncomplete"]
+	path = bundle/pythoncomplete
+	url = https://github.com/vim-scripts/pythoncomplete.git
