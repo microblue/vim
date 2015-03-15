@@ -79,12 +79,6 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu
 set wildmode=longest,list,full
 
-"tmux
-set mouse=a
-if exists("$TMUX")
-    set ttymouse=xterm2
-endif
-
 nmap <silent> <F2> :TagbarToggle<CR>
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 let g:tagbar_width = 30
@@ -150,7 +144,7 @@ inoremap ' ''<ESC>i
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
 " C,C++,Java,Python按F1编译运行
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F1> :call CompileRunGcc()<CR>
+map <F7> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
@@ -249,17 +243,7 @@ let NERDCompactSexyComs=1   " 多行注释时样子更好看
 " plugin indent guides 对齐线
 " ---------------------------------------------------------------------
 " <Leader>ig     toggle
-let g:indent_guides_guide_size=1    "设置宽度
 
-" ---------------------------------------------------------------------
-" 处理文件
-" ---------------------------------------------------------------------
-" **** PHP **** {{{
-" 不显示PHP变量再Taglist中
-""let tlist_php_settings = 'php;c:class;d:constant;f:function'
-" 高亮显示sql语句
-""let php_sql_query = 1 
-" }}}
 
 " **** Python *** {{{
 " For lines that end with \n\ or \ and continue on the next one.
@@ -273,12 +257,6 @@ let g:vimrc_author='Dawson'
 let g:vimrc_email='microblue@gmail.com'
 let g:vimrc_homepage='http://'
 nmap <F4> :AuthorInfoDetect<cr>
-
-"php 注释
-""source ~/.vim/bundle/php-doc/plugin/php-doc.vim
-"inoremap <F3> <ESC>:call PhpDoc()<CR>
-""nnoremap <F3> :call PhpDoc()<CR>
-"vnoremap <F2> :call PhpDocVarBlock()<CR>
 
 "PowerLine插件 状态栏增强显示
 set laststatus=2
