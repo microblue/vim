@@ -223,7 +223,7 @@ let NERDTreeHijackNetrw = 0
 let NERDTreeChDirMode = 2
 let NERDTreeWinPos = 'left'
 let NERDTreeWinSize = 25
-let NERDTreeIgnore = [ '^\.svn$', '\~$' ]
+let NERDTreeIgnore = [ '^\.svn$', '\~$', '.o$', '.so$','.a$' ]
 let g:nerdtree_tabs_open_on_console_startup=1
 
 "-----------------------------------------------------------------
