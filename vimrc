@@ -144,7 +144,7 @@ inoremap ' ''<ESC>i
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
 " C,C++,Java,Python按F1编译运行
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F7> :call CompileRunGcc()<CR>
+map <F10> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
@@ -164,6 +164,8 @@ func! CompileRunGcc()
         exec "!php %"
     endif
 endfunc
+
+map <F7> :make<CR>
 
 " PHP 自动完成
 "'au FileType php call AddPHPFuncList()
