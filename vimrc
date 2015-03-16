@@ -5,8 +5,8 @@ syntax on
 filetype plugin indent on
 
 "syntax
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+let g:syntastic_error_symbol='x'
+let g:syntastic_warning_symbol='i'
 let g:syntastic_check_on_open=1
 let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
@@ -31,11 +31,6 @@ set backupcopy=yes
 set clipboard=unnamed
 set directory-=.
 set laststatus=2
-
-" set list
-" set listchars=tab:\|\ ,
-" highlight LeaderTab guifg=#666666
-" match LeaderTab /\t/
 
 set showcmd
 set smartcase
@@ -251,6 +246,8 @@ let NERDCompactSexyComs=1   " 多行注释时样子更好看
 " For lines that end with \n\ or \ and continue on the next one.
 let g:pyindent_continue = 0
 autocmd Filetype python set completefunc=pythoncomplete#Complete
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height=3
 " }}}
 
 "authorinfo
@@ -294,5 +291,3 @@ func! GetDateStamp()
     return strftime('%Y-%m-%d')
 endfunction
 
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height=3
