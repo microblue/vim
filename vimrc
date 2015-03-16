@@ -32,10 +32,10 @@ set clipboard=unnamed
 set directory-=.
 set laststatus=2
 
-set list
-set listchars=tab:\|\ ,
-highlight LeaderTab guifg=#666666
-match LeaderTab /\t/
+" set list
+" set listchars=tab:\|\ ,
+" highlight LeaderTab guifg=#666666
+" match LeaderTab /\t/
 
 set showcmd
 set smartcase
@@ -176,17 +176,17 @@ map <F7> :make<CR>
 ""endfunction
 
 " 使用 tab 键自动完成或尝试自动完成
-function! InsertTabWrapper()
-	let col=col('.')-1
-	if !col || getline('.')[col-1] !~ '\k'
-		return "\<TAB>"
-	else
-		return "\<C-N>"
-	endif
-endfunction
+" function! InsertTabWrapper()
+	" let col=col('.')-1
+	" if !col || getline('.')[col-1] !~ '\k'
+		" return "\<TAB>"
+	" else
+		" return "\<C-N>"
+	" endif
+" endfunction
 										
 " 重新映射 tab 键到 InsertTabWrapper 函数
-inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
+" inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
 
 "检查php语法
 ""map <F9> :!php -l % <CR>
