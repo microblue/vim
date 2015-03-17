@@ -4,15 +4,6 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
-"syntax
-let g:syntastic_error_symbol='x'
-let g:syntastic_warning_symbol='i'
-let g:syntastic_check_on_open=1
-let g:syntastic_phpcs_conf = "--tab-width=4 --standard=CodeIgniter"
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_javascript_syntax_checker="jshint"
-let g:syntastic_javascript_jshint_conf="~/jshintrc.json"
-
 "sounds
 set noerrorbells
 set novisualbell
@@ -127,18 +118,6 @@ let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 
-vnoremap p "_dP
-
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap < <><ESC>i
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
-" C,C++,Java,Python按F1编译运行
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F10> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
@@ -161,30 +140,6 @@ func! CompileRunGcc()
 endfunc
 
 map <F7> :make<CR>
-
-" PHP 自动完成
-"'au FileType php call AddPHPFuncList()
-"function AddPHPFuncList()
-"    set complete-=k complete+=k
-    " 设置字典补全文件
-""    set dictionary=$HOME/.vim/dict/php.dict
-""endfunction
-
-" 使用 tab 键自动完成或尝试自动完成
-" function! InsertTabWrapper()
-	" let col=col('.')-1
-	" if !col || getline('.')[col-1] !~ '\k'
-		" return "\<TAB>"
-	" else
-		" return "\<C-N>"
-	" endif
-" endfunction
-										
-" 重新映射 tab 键到 InsertTabWrapper 函数
-" inoremap <TAB> <C-R>=InsertTabWrapper()<CR>
-
-"检查php语法
-""map <F9> :!php -l % <CR>
 
 "conf for tabs
 nnoremap <leader>t : tabe<CR>
@@ -250,22 +205,11 @@ let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height=3
 " }}}
 
-"authorinfo
-source ~/.vim/bundle/AuthorInfo/ftplugin/authorinfo.vim
-let g:vimrc_author='Dawson'
-let g:vimrc_email='microblue@gmail.com'
-let g:vimrc_homepage='http://'
-nmap <F4> :AuthorInfoDetect<cr>
-
 "PowerLine插件 状态栏增强显示
 set laststatus=2
 set t_Co=256
 let g:Powline_symbols='fancy'
 
-" 选中状态下 Ctrl+c 复制
-vmap <C-c> "+y
-
-au FileType php,javascript,html,css,python,vim,vimwiki set ff=unix
 "快速保存为,s
 "快速退出（保存）为,w
 "快速退出（不保存）为,q
@@ -282,12 +226,4 @@ nmap <C-Tab> :tabnext<cr>
 "切换buffer
 nmap bn :bn<cr>
 nmap bp :bp<cr>
-
-" 插入模式按 F4 插入当前时间
-imap <F5> <C-r>=GetDateStamp()<cr>
-
-" 返回当前时期
-func! GetDateStamp()
-    return strftime('%Y-%m-%d')
-endfunction
 
