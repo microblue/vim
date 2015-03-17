@@ -242,21 +242,6 @@ let NERDCompactSexyComs=1   " 多行注释时样子更好看
 " <Leader>ig     toggle
 
 
-" **** Python *** {{{
-" For lines that end with \n\ or \ and continue on the next one.
-let g:pyindent_continue = 0
-autocmd Filetype python set completefunc=pythoncomplete#Complete
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height=3
-" }}}
-
-"authorinfo
-source ~/.vim/bundle/AuthorInfo/ftplugin/authorinfo.vim
-let g:vimrc_author='Dawson'
-let g:vimrc_email='microblue@gmail.com'
-let g:vimrc_homepage='http://'
-nmap <F4> :AuthorInfoDetect<cr>
-
 "PowerLine插件 状态栏增强显示
 set laststatus=2
 set t_Co=256
