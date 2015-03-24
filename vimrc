@@ -15,7 +15,7 @@ set fileencodings=utf-8,cp936,gb18030,big5,gbk,euc-jp,latin1
 set fileencoding=utf-8
 set termencoding=utf-8 "编码转换
 
-set cursorline
+
 set autoindent
 set autoread
 set backupcopy=yes
@@ -227,3 +227,12 @@ nmap <C-Tab> :tabnext<cr>
 nmap bn :bn<cr>
 nmap bp :bp<cr>
 
+nmap <S-s> :!screen -x ipython_vim -X stuff $'ipython3 --matplotlib\n'<CR><CR>
+
+function! SendLine()
+    let curline = escape(getline('.'),'"')
+    call system("screen -x ipython_vim -X stuff \"" . curline . "\n\"")
+endfunction
+nnoremap " :wa<CR>:!screen -x ipython_vim -X stuff $'\%run "%:p"\n'<CR><CR>
+nnoremap <S-d> :wa<CR>:!screen -x ipython_vim -X stuff $'\%cd "%:p:h"\n'<CR><CR>
+nnoremap ' :wa<CR>:call SendLine()<CR><CR>
